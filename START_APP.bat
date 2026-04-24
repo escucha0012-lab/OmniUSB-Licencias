@@ -79,5 +79,17 @@ pip install -r requirements.txt
 "%PYTHON%" auto_repair.py
 
 echo.
+echo [3.5/3] Chequeando NodeJS...
+node -v >nul 2>&1
+if errorlevel 1 (
+    if exist "node\node.exe" (
+        set "PATH=%CD%\node;%PATH%"
+        echo [+] NodeJS portable activado.
+    )
+) else (
+    echo [+] NodeJS del sistema OK.
+)
+
+echo.
 echo [+] Abriendo OmniUSB...
 "%PYTHON%" app.py

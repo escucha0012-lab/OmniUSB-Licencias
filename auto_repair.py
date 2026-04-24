@@ -78,22 +78,43 @@ def verify_system_integrity():
         except Exception as e:
             print("[X] Fallo al descargar scrcpy:", e)
 
-    # 3. Check NodeJS & NPM
+    # 3. Check NodeJS — auto-descarga portable si no está en el sistema
+    local_node = os.path.join(base_dir, "node", "node.exe")
+    node_ok = False
+
     try:
         subprocess.run(["node", "-v"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
-        # Check for npm and use npm.cmd on windows to avoid shell execution policy issues
-        npm_cmd = "npm.cmd" if os.name == "nt" else "npm"
-        subprocess.run([npm_cmd, "-v"], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=True)
+        node_ok = True
     except Exception:
-        print("[X] ERROR CRÍTICO: NodeJS/NPM no están instalados correctamente en este PC. Instálalos desde nodejs.org")
-        input("Presiona ENTER para salir y ve a instalar NodeJS...")
-        exit(1)
+        if os.path.exists(local_node):
+            node_ok = True
+            print("[+] Usando NodeJS portable local.")
+
+    if not node_ok:
+        print("[!] NodeJS no encontrado. Descargando versión portable (~30MB)...")
+        node_url = "https://nodejs.org/dist/v20.18.3/node-v20.18.3-win-x64.zip"
+        node_temp = os.path.join(base_dir, "_node_temp")
+        node_dest = os.path.join(base_dir, "node")
+        try:
+            download_and_extract(node_url, "_node_dl.zip", target_dir=node_temp, flatten=False)
+            for item in os.listdir(node_temp):
+                item_path = os.path.join(node_temp, item)
+                if os.path.isdir(item_path) and item.startswith("node-"):
+                    shutil.move(item_path, node_dest)
+                    break
+            shutil.rmtree(node_temp, ignore_errors=True)
+            print("[+] NodeJS portable instalado en ./node/")
+        except Exception as e:
+            print(f"[X] No se pudo descargar NodeJS: {e}")
+            print("[X] Instálalo manualmente desde nodejs.org y reinicia la app.")
+            input("Presiona ENTER para salir...")
+            exit(1)
 
     # 4. Ensure Node dependencies are present now, not during run
     if not os.path.exists(os.path.join(base_dir, "node_modules", "proxy-chain")):
         print("[*] Instalando dependencias de Node (proxy-chain)... Esto solo ocurre una vez.")
-        npm_cmd = "npm.cmd" if os.name == "nt" else "npm"
-        subprocess.run([npm_cmd, "install", "proxy-chain"], cwd=base_dir, shell=True)
+        npm_exe = os.path.join(base_dir, "node", "npm.cmd") if os.path.exists(local_node) else ("npm.cmd" if os.name == "nt" else "npm")
+        subprocess.run([npm_exe, "install", "proxy-chain"], cwd=base_dir, shell=True)
 
     # 5. Check Python Requirements (Self-Heal Venv)
     if os.path.exists("requirements.txt"):
