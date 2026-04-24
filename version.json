@@ -1,6 +1,6 @@
 {
     "version": "4.1.0",
     "release_date": "2026-04-15",
-    "check_url": "",
+    "check_url": "https://raw.githubusercontent.com/escucha0012-lab/OmniUSB-Licencias/main/version.json",
     "notes": "Monitor de salud automatico: detecta tuneles caidos y reconecta solo. Log persistente en OmniUSB_log.txt"
 }
