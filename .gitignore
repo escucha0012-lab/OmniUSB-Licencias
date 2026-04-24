@@ -1,0 +1,25 @@
+# Entorno virtual Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node.js
+node_modules/
+
+# Binarios grandes
+platform-tools/
+platform-tools.zip
+scrcpy/
+gnirehtet.zip
+gnirehtet.exe
+gnirehtet.apk
+
+# Archivos locales / sensibles
+config.json
+OmniUSB_log.txt
+install_path.txt
+
+# Logs y temporales
+*.log
+*.tmp

@@ -1,0 +1,8 @@
+{
+  "batch": "2",
+  "mins": "1",
+  "infinite": true,
+  "stealth": false,
+  "no_proxy": false,
+  "proxies": "# Pega aquí tus proxies (usuario:contraseña@host:puerto)\n# Ejemplo:\n# user:pass@1.2.3.4:5678"
+}

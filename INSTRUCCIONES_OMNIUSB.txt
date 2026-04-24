@@ -1,0 +1,22 @@
+=== OMNIUSB DIRECTOR (STEALTH PROXY EDITION) ===
+
+¡Bienvenido al sistema de enrutamiento y proxy más avanzado y autónomo!
+
+ESTA HERRAMIENTA NO REQUIERE CONFIGURACIONES COMPLEJAS.
+
+REQUISITOS PREVIOS EN LA COMPUTADORA:
+1. Tener Python instalado (Versión 3.10 o superior). Al instalarlo, recuerda marcar la casilla "Add Python to PATH".
+2. Tener NodeJS instalado (Descárgalo de nodejs.org).
+
+INSTRUCCIONES DE USO RÁPIDO:
+1. Dale doble clic al archivo "START_APP.bat". 
+2. La primera vez que lo hagas, el sistema tardará 1 o 2 minutos descargando herramientas (como Gnirehtet y ADB) y adaptándose a tu PC. ¡No cierres la pantalla negra!
+3. Cuando aparezca el panel central azul de OmniUSB, minimiza la consola negra.
+4. Conecta tus celulares por cable USB (Asegúrate que tengan la Depuración USB activada en las opciones de desarrollador).
+5. Abre la aplicación y haz clic en "1. Escanear Dispositivos".
+6. Pega tus Proxies en la caja de texto (Formato IP:PORT:USER:PASS).
+7. Dale al botón "3. CREAR TÚNEL CENTRAL".
+
+El programa se encargará soltar la red, bloquear el Wi-Fi físico de todos los dispositivos para evitar fugas de tu IP real, y enrutar tu lista de proxies de manera silenciosa hacia tus teléfonos.
+
+¡Eso es todo! Disfruta la granja.
